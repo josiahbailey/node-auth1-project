@@ -5,6 +5,7 @@ const session = require('express-session')
 
 const usersRouter = require('./users/users-router')
 const authRouter = require('./auth/auth-router')
+const restricted = require('./auth/restricted')
 
 const server = express()
 
@@ -30,6 +31,6 @@ server.get('/', (req, res) => {
 })
 
 server.use('/api/auth', authRouter)
-server.use('/api/users', usersRouter)
+server.use('/api/users', restricted, usersRouter)
 
 module.exports = server
